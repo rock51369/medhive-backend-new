@@ -7,8 +7,7 @@ import { fetchHospitals } from "./utils/fetchHospitals.mjs";
 import { fetchIndividualHospital } from "./utils/fetchIndividualHospital.mjs";
 
 const app = express();
-const port = 4000;
-// Use the cors middleware
+const port = process.env.PORT || 3000;// Use the cors middleware
 app.use(cors());
 
 // Connect to MongoDB
