@@ -4,10 +4,11 @@ import cors from "cors";
 import { connectDB } from "./database/connectDb.mjs";
 import { Hospital } from "./database/model.mjs";
 import { fetchHospitals } from "./utils/fetchHospitals.mjs";
+import { fetchNews } from "./utils/fetchNews.mjs";
 import { fetchIndividualHospital } from "./utils/fetchIndividualHospital.mjs";
 
 const app = express();
-const port = process.env.PORT || 3000;// Use the cors middleware
+const port = process.env.PORT || 4000; // Use the cors middleware
 app.use(cors());
 
 // Connect to MongoDB
@@ -35,6 +36,16 @@ app.get("/Hospitaldetails", async (req, res) => {
   }
 });
 
+app.get("/News", async (req, res) => {
+  res.setHeader("Cache-Control", "no-store");
+  try {
+    const response = await fetchNews();
+    res.setHeader("Content-Type", "application/json");
+    res.send(JSON.stringify(response));
+  } catch (err) {
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
 
 // Start the server
 app.listen(port, () => {
