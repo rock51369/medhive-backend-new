@@ -57,7 +57,7 @@ app.get("/form_details",async(req,res)=>{
     // console.log(ID);
     // console.log(response);
     res.setHeader("Content-Type", "application/json");
-    res.send(JSON.stringify(response));
+    res.send(JSON.stringify(response));``
     res.status(200);
   }catch(err){
     res.status(500).json({ error: "Internal Server Error" });
