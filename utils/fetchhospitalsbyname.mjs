@@ -3,14 +3,14 @@ import { Hospital } from "../database/model.mjs";
 // Connect to MongoDB
 connectDB();
 
-const fetchIndividualHospital = async function (H_No) {
+const fetchhospitalsbyname = async function (searchTerm) {
     try {
-      const hospital = await Hospital.findOne({ H_No: H_No }, {projection: { _id: 0 }} ,{ maxTimeMS: 30000 });
+      const hospital = await Hospital.find({
+        Hospital_Name: { $regex: `^${searchTerm}`, $options: 'i' } }).exec();
       return hospital;
-      
     } catch (error) {
       return error;
     }
   };
 
-export { fetchIndividualHospital };
+export { fetchhospitalsbyname };
